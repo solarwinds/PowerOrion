@@ -1,3 +1,13 @@
+#requires -Version 3.0
+
+# initialize SWIS connection 
+<#if (Get-PSSnapin -Name SwisSnapin -ErrorAction SilentlyContinue){
+  remove-PSSnapin SwisSnapin
+}
+
+Add-PSSnapin SwisSnapin 
+#>
+
 #Get public and private function definition files.
     $Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue )
     $Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
@@ -20,17 +30,13 @@
     # Export Public functions ($Public.BaseName) for WIP modules
     # Set variables visible to the module and its functions only
 
-# initialize SWIS connection 
-if (Get-PSSnapin -Name SwisSnapin -ErrorAction SilentlyContinue){
-  remove-PSSnapin SwisSnapin
-}
-Add-PSSnapin SwisSnapin
-
 Export-ModuleMember -Function $Public.Basename
 
 #Code to unload PSSNappin when Module is unloaded
 $mInfo = $MyInvocation.MyCommand.ScriptBlock.Module
 $mInfo.OnRemove = {
-  write-verbose "Unloading PowerOrion"
+  write-verbose 'Unloading PowerOrion'
+ if (Get-PSSnapin -Name SwisSnapin -ErrorAction SilentlyContinue){
   remove-PSSnapin SwisSnapin
+}
 }
