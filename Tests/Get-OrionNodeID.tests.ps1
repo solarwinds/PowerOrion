@@ -5,18 +5,16 @@ $PSCommandPath
 $CodeFile = $PSCommandPath
 . (($CodeFile -replace '\\tests\\', '\public\')  -replace '\.tests\.ps1$', '.ps1')
 
-# initialize SWIS connection 
-if (Get-PSSnapin -Name SwisSnapin -ErrorAction SilentlyContinue){
-  remove-PSSnapin SwisSnapin
-}
-Add-PSSnapin SwisSnapin 
-$MyInvocation.PSScriptRoot
+
+ 
 $settings = Get-Content "$PSScriptRoot\PesterConfig.json" |  ConvertFrom-Json 
 $user = $settings.User
 $password=$settings.Password
 $OrionServer = $settings.OrionServer
-$swis = Connect-Swis -UserName $user -Password $password -Hostname $OrionServer
+$ModPath = $settings.ModulePath
 
+Import-Module -name $ModPath -Force 
+$swis = Connect-Swis -UserName $user -Password $password -Hostname $OrionServer
 
 #endregion
 
