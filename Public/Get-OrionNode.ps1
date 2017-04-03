@@ -31,16 +31,16 @@ function Get-OrionNode
     $SwisConnection,
         
     [Parameter(ValueFromPipelineByPropertyName=$true,
-    Parametersetname="ID")]
+    Parametersetname='ID')]
         
     [validatenotnullorempty()]
-    [alias("ID")]
+    [alias('ID')]
     [int32]
     $NodeID,
       
     #The IP Address of the node
     [Parameter(ValueFromPipelineByPropertyName=$true,
-    Parametersetname="IP")]
+    Parametersetname='IP')]
     [String]$IPAddress,
 
 
@@ -54,18 +54,18 @@ function Get-OrionNode
 
   Begin
   {
-    Write-Verbose "Starting $($myinvocation.mycommand)"  
+    Write-Verbose -Message "Starting $($myinvocation.mycommand)"  
     $OrionServer = Get-OrionHostFromSwisConnection -swisconnection $SwisConnection
-    write-debug " The value of OrionServer is $OrionServer"
+    write-debug -Message " The value of OrionServer is $OrionServer"
 
     if($IPAddress){
-      write-debug " The value of IPAddress is $IPAddress"
-      write-verbose " IP passed, calling Get-OrionNodeID for $IPAddress"
+      write-debug -Message " The value of IPAddress is $IPAddress"
+      write-verbose -Message " IP passed, calling Get-OrionNodeID for $IPAddress"
       $ID = Get-OrionNodeID -IPAddress $IPAddress -SwisConnection $SwisConnection
     }else {
             
-      write-debug " The value of ID is $NodeID"
-      write-verbose " Integer passed"
+      write-debug -Message " The value of ID is $NodeID"
+      write-verbose -Message ' Integer passed'
       $ID = $NodeID           
     }
            
@@ -75,19 +75,19 @@ function Get-OrionNode
     } else {
       $uri = "swis://$OrionServer/Orion/Orion.Nodes/NodeID=$ID"
     }
-    Write-Debug " The URI is $uri"
+    Write-Debug -Message " The URI is $uri"
   }
   Process
   {
-    Write-Verbose " Getting properties at $uri"
-    $nodeProps = Get-SwisObject $SwisConnection -Uri $uri
+    Write-Verbose -Message " Getting properties at $uri"
+    $nodeProps = Get-SwisObject -SwisConnection $SwisConnection -Uri $uri
     $properties = New-Object -TypeName psobject -Property $nodeProps
-    write-debug " The value of nodeprops is $nodeProps"
-    write-debug " The value of properties is $($properties.gettype())"
+    write-debug -Message " The value of nodeprops is $nodeProps"
+    write-debug -Message " The value of properties is $($properties.gettype())"
   }
   End
   {        
-    Write-Verbose "Finishing $($myinvocation.mycommand)"
-    Write-Output $properties
+    Write-Verbose -Message "Finishing $($myinvocation.mycommand)"
+    Write-Output -InputObject $properties
   }
 }
