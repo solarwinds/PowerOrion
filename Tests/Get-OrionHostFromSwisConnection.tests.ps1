@@ -5,16 +5,6 @@ $PSCommandPath
 $CodeFile = $PSCommandPath
 . (($CodeFile -replace '\\tests\\', '\public\')  -replace '\.tests\.ps1$', '.ps1')
 
-
-$settings = Get-Content "$PSScriptRoot\PesterConfig.json" |  ConvertFrom-Json 
-$user = $settings.User
-$password=$settings.Password
-$OrionServer = $settings.OrionServer
-$ModPath = $settings.ModulePath
-
-Import-Module -name $ModPath -Force 
-$swis = Connect-Swis -UserName $user -Password $password -Hostname $OrionServer
-
 #endregion
 
 #describes the function Get-OrionNodeID
