@@ -15,8 +15,20 @@ function New-OrionPollerType
   (
     # The type of poller to add (e.g. N.IPAddress.ICMP.Generic)
     [Parameter(Mandatory=$true,
-        ValueFromPipelineByPropertyName=$true,
-    Position=0)]
+        ValueFromPipelineByPropertyName=$true,    
+        Position=0)]
+    [ValidateSet("N.IPAddress.ICMP.Generic",
+        "N.ResponseTime.ICMP.Native",
+        "N.Status.ICMP.Native",
+        "N.Details.SNMP.Generic",
+        "N.Uptime.SNMP.Generic",
+        "N.Cpu.SNMP.CiscoGen3",
+        "N.Memory.SNMP.CiscoGen3",
+        "N.IPAddress.SNMP.Generic",
+        "N.Details.WMI.Vista",
+        "N.Uptime.WMI.XP", 
+        "N.Cpu.WMI.Windows",
+        "N.Memory.WMI.Windows")]
     $PollerType ="N.IPAddress.ICMP.Generic",
 
     # Node Properties used to build the pollers
