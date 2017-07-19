@@ -6,7 +6,7 @@ $CodeFile = $PSCommandPath
 . (($CodeFile -replace '\\tests\\', '\public\')  -replace '\.tests\.ps1$', '.ps1')
 
 #endregion
-
+InModuleScope PowerOrion{
 #describes the function Get-OrionNodeID
 Describe 'Get-OrionHostFromSwisConnection' {
 
@@ -28,4 +28,5 @@ Describe 'Get-OrionHostFromSwisConnection' {
    
   }
    
+}
 }

@@ -14,19 +14,25 @@ try
 $settings = Get-Content "$PSScriptRoot\PesterConfig.json" |  ConvertFrom-Json 
 $user = $settings.User
 $password=$settings.Password
-$OrionServer = $settings.OrionServer
+$Global:OrionServer = $settings.OrionServer
 $ModPath = $settings.ModulePath
 
 Import-Module -name $ModPath -Force 
 $global:swis = Connect-Swis -UserName $user -Password $password -Hostname $OrionServer
 
-Invoke-Pester 
+ try{
+        Write-Verbose "Verifying connection to Orion."
 
-<#foreach ($file in Get-ChildItem -Path ..\Public\*.ps1){
-    Invoke-Pester -CodeCoverage $file 
+        $swis.Open()
+    }
+    catch{
+        Write-Error $_.Exception.Message
     }
 
-#>
+
+Invoke-Pester 
+
+
 if (Get-PSSnapin -Name SwisSnapin -ErrorAction SilentlyContinue){
   remove-PSSnapin SwisSnapin
 }
