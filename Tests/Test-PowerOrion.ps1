@@ -15,9 +15,9 @@ $settings = Get-Content "$PSScriptRoot\PesterConfig.json" |  ConvertFrom-Json
 $user = $settings.User
 $password=$settings.Password
 $Global:OrionServer = $settings.OrionServer
-$ModPath = $settings.ModulePath
+$Global:ModPath = $settings.ModulePath
 
-Import-Module -name $ModPath -Force 
+#Import-Module -name $ModPath -Force 
 $global:swis = Connect-Swis -UserName $user -Password $password -Hostname $OrionServer
 
  try{
@@ -32,6 +32,9 @@ $global:swis = Connect-Swis -UserName $user -Password $password -Hostname $Orion
 
 Invoke-Pester 
 
+set-location ..
+
+Invoke-ScriptAnalyzer -Path C:\projects\PowerOrion
 
 if (Get-PSSnapin -Name SwisSnapin -ErrorAction SilentlyContinue){
   remove-PSSnapin SwisSnapin
