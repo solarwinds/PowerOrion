@@ -3,7 +3,7 @@
 #. ($PSCommandPath -replace '\.tests\.ps1$', '.ps1')
 $PSCommandPath
 $CodeFile = $PSCommandPath
-. (($CodeFile -replace '\\tests\\', '\public\')  -replace '\.tests\.ps1$', '.ps1')
+. (($CodeFile -replace '\\tests\\', '\private\')  -replace '\.tests\.ps1$', '.ps1')
 
 #endregion
 #add-PSSnapin SwisSnapin 
@@ -12,7 +12,7 @@ Import-Module -name $ModPath -Force -Verbose
 
 InModuleScope PowerOrion{
   #describes the function Get-OrionNodeID
-  Describe -Name 'Get-OrionInstalledModules' -Fixture {
+  Describe -Name 'Get-OrionInstalledModules' -Tags Readonly -Fixture {
 
     # scenario 1: call the function without arguments
     Context 'Running with -Swisconnection'   {
