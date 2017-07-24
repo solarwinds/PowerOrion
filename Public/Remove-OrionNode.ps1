@@ -36,7 +36,7 @@ function Remove-OrionNode
     [CmdletBinding(DefaultParameterSetName='URI', 
                   SupportsShouldProcess=$true, 
                   PositionalBinding=$false,
-                  HelpUri = 'http://www.microsoft.com/',
+                  HelpUri = 'https://github.com/solarwinds/PowerOrion',
                   ConfirmImpact='Medium')]
     
     [OutputType([String])]
