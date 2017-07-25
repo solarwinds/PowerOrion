@@ -61,7 +61,12 @@ function Get-OrionNodeID
       } else
       {
         write-verbose " Querying Orion Server for Node ID for $IPAddress"
-        $NodeID = Get-SwisData $SwisConnection "SELECT NodeID FROM Orion.Nodes WHERE IP_Address=@ip" @{ip=$IPAddress}
+        $NodeID = Get-SwisData $SwisConnection "SELECT top 1 NodeID FROM Orion.Nodes WHERE IP_Address=@ip" @{ip=$IPAddress}
+        
+      }
+      
+      if(-not $NodeID){
+        Write-Error "No Node Id found"
       }
    
   }

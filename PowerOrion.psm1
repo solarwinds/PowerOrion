@@ -1,12 +1,14 @@
 #requires -Version 3.0
 
 # initialize SWIS connection 
-if (Get-PSSnapin -Name SwisSnapin -ErrorAction SilentlyContinue){
+<#if (Get-PSSnapin -Name SwisSnapin -ErrorAction SilentlyContinue){
   remove-PSSnapin SwisSnapin
 }
 
 Add-PSSnapin SwisSnapin 
+#>
 
+import-module C:\projects\SwisPowerShell
 
 #Get public and private function definition files.
     $Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue )

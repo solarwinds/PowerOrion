@@ -6,9 +6,10 @@ $CodeFile = $PSCommandPath
 Import-Module -name $ModPath -Force -Verbose
 
 InModuleScope PowerOrion{
-  Describe "New-OrionNode" {
+  Describe "New-OrionNode" -Tags Create, Node {
     Context 'Adding node with ICMP Only' {
-            
+    
+               
       It "should not throw" {
         {New-OrionNode -SwisConnection $swis -ipaddress "192.168.100.1" -Verbose  } | should not throw
             
