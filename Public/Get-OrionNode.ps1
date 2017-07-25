@@ -41,6 +41,7 @@ function Get-OrionNode
     #The IP Address of the node
     [Parameter(ValueFromPipelineByPropertyName=$true,
     Parametersetname='IP')]
+    [ValidateScript({$_ -match [IPAddress]$_ })] 
     [String]$IPAddress,
 
 

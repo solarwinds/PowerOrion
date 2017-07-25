@@ -7,11 +7,11 @@ $CodeFile = $PSCommandPath
 
 #endregion
 
-Import-Module -name $ModPath -Force -Verbose
+Import-Module -name $ModPath -Force 
 
 InModuleScope PowerOrion{
   #describes the function Get-OrionNodeID
-  Describe 'Get-OrionNodeID' {
+  Describe 'Get-OrionNodeID' -Tags Readonly -Fixture {
 
     # scenario 1: call the function without arguments
     Context 'Running with -IPAddress'   {
@@ -21,6 +21,10 @@ InModuleScope PowerOrion{
         # make sure you place the command in a 
         # scriptblock (braces):
         { Get-OrionNodeID -IPAddress '192.168.100.2' -SwisConnection $swis} | Should Not Throw
+      }
+      It 'throws an error when an invalid IP is passed' {
+       
+        { Get-OrionNodeID -IPAddress '260.168.100.2' -SwisConnection $swis} | Should  Throw
       }
       It 'returns an  int ' {
         (Get-OrionNodeID -IPAddress '192.168.100.2' -SwisConnection $swis).gettype() | should be int

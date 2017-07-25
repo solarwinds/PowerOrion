@@ -3,7 +3,7 @@ $CodeFile = $PSCommandPath
 . (($CodeFile -replace '\\tests\\', '\public\')  -replace '\.tests\.ps1$', '.ps1')
 
 #add-PSSnapin SwisSnapin
-Import-Module -name $ModPath -Force -Verbose
+Import-Module -name $ModPath -Force 
 
 InModuleScope PowerOrion{
   Describe "New-OrionNode" {

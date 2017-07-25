@@ -8,7 +8,7 @@ $CodeFile = $PSCommandPath
 #endregion
 #add-PSSnapin SwisSnapin 
 
-Import-Module -name $ModPath -Force -Verbose
+Import-Module -name $ModPath -Force
 
 InModuleScope PowerOrion{
   #describes the function Get-OrionNodeID

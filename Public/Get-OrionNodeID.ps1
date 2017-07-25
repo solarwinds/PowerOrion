@@ -8,13 +8,7 @@
     Get-OrionNodeID -node "lab-hpinsight" -swisconnection $swis
     .EXAMPLE
     Get-OrionNodeID -IPAddress 10.199.1.100 -SwisConnection $swis
-    .EXAMPLE 
-    $swis = Connect-Swis -UserName admin -Password "" -Hostname 10.160.5.75
-    Get-OrionNodeID -Node $TestNode -SwisConnection $swis
     
-    3
-                                                                                                        
- 
 #>
 function Get-OrionNodeID
 {
@@ -37,6 +31,7 @@ function Get-OrionNodeID
         ValueFromPipelineByPropertyName=$true,
         Position=0,
     Parametersetname="IP")]
+    [ValidateScript({$_ -match [IPAddress]$_ })] 
     [validatenotnullorempty()]
     [alias("IP")]
     [String]$IPAddress,

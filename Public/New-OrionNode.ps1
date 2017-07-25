@@ -34,6 +34,7 @@ function New-OrionNode
         Position=0,
     Parametersetname="IP")]        
     [Alias("IP")]
+    [ValidateScript({$_ -match [IPAddress]$_ })] 
     [String]$IPAddress,
 
     #The IP address of the node to be added for monitoring

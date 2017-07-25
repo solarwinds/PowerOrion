@@ -30,7 +30,7 @@ $global:swis = Connect-Swis -UserName $user -Password $password -Hostname $Orion
     }
 
 
-Invoke-Pester 
+Invoke-Pester -Tag Readonly
 
 set-location ..
 
