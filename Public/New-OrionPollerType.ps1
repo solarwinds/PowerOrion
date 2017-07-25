@@ -28,7 +28,9 @@ function New-OrionPollerType
         "N.Details.WMI.Vista",
         "N.Uptime.WMI.XP", 
         "N.Cpu.WMI.Windows",
-        "N.Memory.WMI.Windows")]
+        "N.Memory.WMI.Windows",
+        "N.AssetInventory.Snmp.Generic",
+        "N.AssetInventory.WMI.Generic")]
     $PollerType ="N.IPAddress.ICMP.Generic",
 
     # Node Properties used to build the pollers

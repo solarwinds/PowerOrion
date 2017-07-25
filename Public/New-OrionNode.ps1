@@ -158,7 +158,7 @@ function New-OrionNode
                 
 
         #next define the pollers 
-        $PollerTypes = @("N.Details.SNMP.Generic","N.Uptime.SNMP.Generic","N.Cpu.SNMP.CiscoGen3","N.Memory.SNMP.CiscoGen3", "N.IPAddress.SNMP.Generic")
+        $PollerTypes = @("N.Details.SNMP.Generic","N.Uptime.SNMP.Generic","N.Cpu.SNMP.CiscoGen3","N.Memory.SNMP.CiscoGen3", "N.IPAddress.SNMP.Generic", "N.AssetInventory.Snmp.Generic")
 
       }#end of SNMPv2
       "WMI"{ # add a node
@@ -207,7 +207,7 @@ function New-OrionNode
         }
 
         #next define the pollers 
-        $PollerTypes = @("N.Status.ICMP.Native","N.ResponseTime.ICMP.Native","N.Details.WMI.Vista","N.Uptime.WMI.XP", "N.Cpu.WMI.Windows","N.Memory.WMI.Windows")
+        $PollerTypes = @("N.Status.ICMP.Native","N.ResponseTime.ICMP.Native","N.Details.WMI.Vista","N.Uptime.WMI.XP", "N.Cpu.WMI.Windows","N.Memory.WMI.Windows","N.AssetInventory.WMI.Generic")
       } #end of WMI
 
     }#end of switch
